@@ -60,6 +60,7 @@ namespace testApp
             }
         }
 
+        //function to play currently selected song, and display corresponding art
         private void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //ends any previously playing songs
@@ -70,10 +71,16 @@ namespace testApp
             //player opens uri
             musPlayer.Open(music);
 
+            //conversion magic based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
+            BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
+            //assigns image path to image box
+            AlbumArt.Source = image;
+
             //player plays song
             musPlayer.Play();
         }
 
+        //function to move player back one song
         private void PreviousSongButton_Click(object sender, RoutedEventArgs e)
         {
             //ends any previously playing songs
@@ -140,6 +147,24 @@ namespace testApp
 
             //player plays song
             musPlayer.Play();
+        }
+
+        //function to add art for songs, functions in same way as adding songs
+        private void AddSongArtButton_Click(object sender, RoutedEventArgs e)
+        {
+            //opens file window to add images
+            OpenFileDialog file = new OpenFileDialog();
+
+            //filters selection for only music
+            file.Filter = file.Filter = "All Supported Images | *.jpg; *.png | JPGs | *.jpg | PNGs | *.png";
+            //allows for selection of multiple images
+            file.Multiselect = true;
+
+            //adds image path to imagePaths array
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                imagePaths = file.FileNames;
+            }
         }
     }
 }
