@@ -36,12 +36,13 @@ namespace testApp
             InitializeComponent();
         }
 
+        //function to add songs to listbox
         private void AddSongsButton_Click(object sender, RoutedEventArgs e)
         {
             //opens file window to add songs
             OpenFileDialog file = new OpenFileDialog();
 
-            //filters selection for only music
+            //filters selection to only mp3, wma
             file.Filter = file.Filter = "All Supported Audio | *.mp3; *.wma | MP3s | *.mp3 | WMAs | *.wma";
             //allows for selection of multiple songs
             file.Multiselect = true;
@@ -60,6 +61,28 @@ namespace testApp
             }
         }
 
+        //function to add art for songs, functions in same way as adding songs
+        private void AddSongArtButton_Click(object sender, RoutedEventArgs e)
+        {
+            //sets source to null, had to do this to remove a test image from the file
+            AlbumArt.Source = null;
+            //opens file window to add images
+            OpenFileDialog file = new OpenFileDialog();
+
+            //filters selection to only jpgs, pngs
+            file.Filter = file.Filter = "All Supported Images | *.jpg; *.png | JPGs | *.jpg | PNGs | *.png";
+            //allows for selection of multiple images
+            file.Multiselect = true;
+
+            //adds image path to imagePaths array
+            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                imagePaths = file.FileNames;
+            }
+        }
+
+
+
         //function to play currently selected song, and display corresponding art
         private void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -71,13 +94,36 @@ namespace testApp
             //player opens uri
             musPlayer.Open(music);
 
-            //conversion magic based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
+            //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
             BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
             //assigns image path to image box
             AlbumArt.Source = image;
 
             //player plays song
             musPlayer.Play();
+        }
+
+        //function to play all songs from song list
+        private void PlayAllSongsButton_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i = 0; i < songTitles.Length; i++)
+            {
+                //ends any previously playing songs
+                musPlayer.Close();
+
+                //creates new uri based on selected song
+                Uri music = new Uri(songPaths[SongList.SelectedIndex + i]);
+                //player opens uri
+                musPlayer.Open(music);
+
+                //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
+                BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex + i]));
+                //assigns image path to image box
+                AlbumArt.Source = image;
+
+                //player plays song
+                musPlayer.Play();
+            }
         }
 
         //function to move player back one song
@@ -97,6 +143,27 @@ namespace testApp
             //player plays song
             musPlayer.Play();
         }
+
+        //function to move player forward one song
+        private void NextSongButton_Click(object sender, RoutedEventArgs e)
+        {
+            //ends any previously playing songs
+            musPlayer.Close();
+
+            //sets selected index forward 1
+            SongList.SelectedIndex = SongList.SelectedIndex + 1;
+
+            //creates new uri based on new selected song index
+            Uri music = new Uri(songPaths[SongList.SelectedIndex]);
+            //player opens uri
+            musPlayer.Open(music);
+
+            //player plays song
+            musPlayer.Play();
+        }
+
+
+
 
         //function to shuffle songs in SongList, based on comment found on this site http://csharphelper.com/blog/2014/07/randomize-arrays-in-c/
         //originally tried to just create a new array and have it set to random values of the orignal title array, but did some more searching for a different way and found this
@@ -128,42 +195,6 @@ namespace testApp
             foreach (string title in randomTitleList)
             {
                 SongList.Items.Add(title);
-            }
-        }
-
-        //function to move player forward one song
-        private void NextSongButton_Click(object sender, RoutedEventArgs e)
-        {
-            //ends any previously playing songs
-            musPlayer.Close();
-
-            //sets selected index forward 1
-            SongList.SelectedIndex = SongList.SelectedIndex + 1;
-
-            //creates new uri based on new selected song index
-            Uri music = new Uri(songPaths[SongList.SelectedIndex]);
-            //player opens uri
-            musPlayer.Open(music);
-
-            //player plays song
-            musPlayer.Play();
-        }
-
-        //function to add art for songs, functions in same way as adding songs
-        private void AddSongArtButton_Click(object sender, RoutedEventArgs e)
-        {
-            //opens file window to add images
-            OpenFileDialog file = new OpenFileDialog();
-
-            //filters selection for only music
-            file.Filter = file.Filter = "All Supported Images | *.jpg; *.png | JPGs | *.jpg | PNGs | *.png";
-            //allows for selection of multiple images
-            file.Multiselect = true;
-
-            //adds image path to imagePaths array
-            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                imagePaths = file.FileNames;
             }
         }
     }
