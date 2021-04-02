@@ -167,6 +167,8 @@ namespace testApp
 
         //function to shuffle songs in SongList, based on comment found on this site http://csharphelper.com/blog/2014/07/randomize-arrays-in-c/
         //originally tried to just create a new array and have it set to random values of the orignal title array, but did some more searching for a different way and found this
+
+        //ONLY SHUFFLES SONG TITLES, DOESN'T REORDER SONG PATHS
         private void ShuffleSongsButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Close();
@@ -175,16 +177,16 @@ namespace testApp
             Random rand = new Random();
 
             //creates list to hold titles to be shuffled
-            List<string> shufTitle = new List<string>();
+            List<string> shufTitles = new List<string>();
 
             //adds song titles to list
-            foreach (string title in SongList.Items)
+            foreach(string title in SongList.Items)
             {
-                shufTitle.Add(title);
+                shufTitles.Add(title);
             }
 
             //creates variable of randomly selected song titles
-            var randomTitleList = from i in shufTitle
+            var randomTitleList = from i in shufTitles
                                   orderby rand.Next()
                                   select i;
 
@@ -196,6 +198,18 @@ namespace testApp
             {
                 SongList.Items.Add(title);
             }
+        }
+
+        //function to resume playing current song
+        private void ResumePlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            musPlayer.Play();
+        }
+
+        //function to pause current song
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            musPlayer.Pause();
         }
     }
 }
