@@ -21,6 +21,8 @@ namespace testApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Design and code for adding/playing music based off of tutorial by Vijay Thapa: https://www.youtube.com/watch?v=wjmU28ukjwA
+
         //creates music player
         MediaPlayer musPlayer = new MediaPlayer();
 
@@ -168,7 +170,7 @@ namespace testApp
         //function to shuffle songs in SongList, based on comment found on this site http://csharphelper.com/blog/2014/07/randomize-arrays-in-c/
         //originally tried to just create a new array and have it set to random values of the orignal title array, but did some more searching for a different way and found this
 
-        //ONLY SHUFFLES SONG TITLES, DOESN'T REORDER SONG PATHS
+        //ONLY SHUFFLES SONG TITLES, DOESN'T REORDER SONG PATHS, AND DOESN'T CHANGE SONGTITLES ARRAY
         private void ShuffleSongsButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Close();
@@ -196,6 +198,7 @@ namespace testApp
             //adds randomTitleList to listbox
             foreach (string title in randomTitleList)
             {
+
                 SongList.Items.Add(title);
             }
         }
