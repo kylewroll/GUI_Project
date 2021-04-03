@@ -101,11 +101,16 @@ namespace testApp
             //assigns image path to image box
             AlbumArt.Source = image;
 
+            //sets songName variable, and updates CurrentSongLabel to display it
+            string songName = songTitles[SongList.SelectedIndex];
+            CurrentSongLabel.Content = "Currently playing: " + songName;
+
             //player plays song
             musPlayer.Play();
         }
 
         //function to play all songs from song list
+        //DOESNT WORK CURRENTLY
         private void PlayAllSongsButton_Click(object sender, RoutedEventArgs e)
         {
             for(int i = 0; i < songTitles.Length; i++)
@@ -134,8 +139,18 @@ namespace testApp
             //ends any previously playing songs
             musPlayer.Close();
 
-            //sets selected index backwards 1
-            SongList.SelectedIndex = SongList.SelectedIndex - 1;
+            //if loop for when previous button is pressed on first song
+            if (SongList.SelectedIndex == 0)
+            {
+                //sets selected index to last item
+                SongList.SelectedIndex = SongList.Items.Count - 1;
+            }
+
+            else
+            {
+                //sets selected index backwards 1
+                SongList.SelectedIndex = SongList.SelectedIndex - 1;
+            }
 
             //creates new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
@@ -152,8 +167,18 @@ namespace testApp
             //ends any previously playing songs
             musPlayer.Close();
 
-            //sets selected index forward 1
-            SongList.SelectedIndex = SongList.SelectedIndex + 1;
+            //if loop for when next is pressed on the last song
+            if(SongList.SelectedIndex == SongList.Items.Count - 1)
+            {
+                //sets selected index to first item
+                SongList.SelectedIndex = 0;
+            }
+            
+            else
+            {
+                //sets selected index forward 1
+                SongList.SelectedIndex = SongList.SelectedIndex + 1;
+            }
 
             //creates new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
@@ -167,10 +192,7 @@ namespace testApp
 
 
 
-        //function to shuffle songs in SongList, based on comment found on this site http://csharphelper.com/blog/2014/07/randomize-arrays-in-c/
-        //originally tried to just create a new array and have it set to random values of the orignal title array, but did some more searching for a different way and found this
-
-        //ONLY SHUFFLES SONG TITLES, DOESN'T REORDER SONG PATHS, AND DOESN'T CHANGE SONGTITLES ARRAY
+        //function for shuffling loaded songs
         private void ShuffleSongsButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Close();
@@ -178,30 +200,35 @@ namespace testApp
             //creates random for shuffling song list
             Random rand = new Random();
 
-            //creates list to hold titles to be shuffled
-            List<string> shufTitles = new List<string>();
-
-            //adds song titles to list
-            foreach(string title in SongList.Items)
-            {
-                shufTitles.Add(title);
-            }
-
-            //creates variable of randomly selected song titles
-            var randomTitleList = from i in shufTitles
-                                  orderby rand.Next()
-                                  select i;
-
-            //clears current listbox
+            //clears listbox of current songs
             SongList.Items.Clear();
 
-            //adds randomTitleList to listbox
-            foreach (string title in randomTitleList)
+            //loops over titles, generates random number in the scope of the titles, and replaces songs in the order that they are generated
+            for (int i = 0; i < songTitles.Length; i++)
             {
+                int select = rand.Next(i, songTitles.Length);
 
-                SongList.Items.Add(title);
+                //replace song titles
+                string titleTemp = songTitles[i];
+                songTitles[i] = songTitles[select];
+                songTitles[select] = titleTemp;
+
+                //replace song paths (so player doesnt play song originally at [0])
+                string songPathTemp = songPaths[i];
+                songPaths[i] = songPaths[select];
+                songPaths[select] = songPathTemp;
+
+                //replace image paths (so images are properly updated)
+                string imagePathTemp = imagePaths[i];
+                imagePaths[i] = imagePaths[select];
+                imagePaths[select] = imagePathTemp;
+
+                //add song titles to listbox in new order
+                SongList.Items.Add(songTitles[i]);
             }
         }
+
+
 
         //function to resume playing current song
         private void ResumePlayButton_Click(object sender, RoutedEventArgs e)
