@@ -33,9 +33,14 @@ namespace testApp
         //array for paths to image files in folder
         string[] imagePaths;
 
+        //boolean for determining whether or not images are added
+        bool images = false;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            VolumeLabel.Content = musPlayer.Volume;
         }
 
         //function to add songs to listbox
@@ -80,6 +85,7 @@ namespace testApp
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 imagePaths = file.FileNames;
+                images = true;
             }
         }
 
@@ -96,10 +102,14 @@ namespace testApp
             //player opens uri
             musPlayer.Open(music);
 
-            //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
-            BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
-            //assigns image path to image box
-            AlbumArt.Source = image;
+            if(images == true)
+            {
+                //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
+                BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
+                //assigns image path to image box
+                AlbumArt.Source = image;
+            }
+            
 
             //sets songName variable, and updates CurrentSongLabel to display it
             string songName = songTitles[SongList.SelectedIndex];
@@ -141,9 +151,13 @@ namespace testApp
                 //updates index in listbox
                 SongList.SelectedIndex = currentSongIndex;
 
-                //updates album image
-                BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
-                AlbumArt.Source = image;
+                if(images == true)
+                {
+                    //updates album image
+                    BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
+                    AlbumArt.Source = image;
+                }
+                
 
                 //updates current song label
                 string songName = songTitles[SongList.SelectedIndex];
@@ -226,6 +240,7 @@ namespace testApp
         private void ShuffleSongsButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Close();
+            SongList.SelectedIndex = -1;
 
             //creates random for shuffling song list
             Random rand = new Random();
@@ -248,10 +263,14 @@ namespace testApp
                 songPaths[i] = songPaths[select];
                 songPaths[select] = songPathTemp;
 
-                //replace image paths (so images are properly updated)
-                string imagePathTemp = imagePaths[i];
-                imagePaths[i] = imagePaths[select];
-                imagePaths[select] = imagePathTemp;
+                if(images == true)
+                {
+                    //replace image paths (so images are properly updated)
+                    string imagePathTemp = imagePaths[i];
+                    imagePaths[i] = imagePaths[select];
+                    imagePaths[select] = imagePathTemp;
+                }
+                
 
                 //add song titles to listbox in new order
                 SongList.Items.Add(songTitles[i]);

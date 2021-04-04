@@ -20,6 +20,7 @@
         <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10" Background="{x:Null}"/>
         <Button x:Name="VolumeDownButton" Content="-" HorizontalAlignment="Left" Height="35" Margin="377,251,0,0" VerticalAlignment="Top" Width="39" Click="VolumeDownButton_Click"/>
         <Button x:Name="VolumeUpButton" Content="+" HorizontalAlignment="Left" Height="35" Margin="466,251,0,0" VerticalAlignment="Top" Width="39" Click="VolumeUpButton_Click"/>
-        <Label x:Name="VolumeLabel" Content="0" HorizontalAlignment="Left" Height="35" Margin="421,251,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="VolumeLabel" HorizontalAlignment="Left" Height="35" Margin="421,251,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="Volume" Content="Volume" HorizontalAlignment="Left" Height="21" Margin="416,286,0,0" VerticalAlignment="Top" Width="50" FontSize="10"/>
     </Grid>
 </Window>
