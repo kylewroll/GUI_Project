@@ -19,6 +19,4 @@
         <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Height="36" Margin="386,250,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="1.501,0.695" Click="PauseButton_Click"/>
         <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10"/>
     </Grid>
-
-
 </Window>

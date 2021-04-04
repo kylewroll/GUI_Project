@@ -108,30 +108,62 @@ namespace testApp
             //player plays song
             musPlayer.Play();
         }
-
-        //function to play all songs from song list
-        //DOESNT WORK CURRENTLY
+                
+        //function to play all songs from song list, manually plays first song, then loops through rest till end
         private void PlayAllSongsButton_Click(object sender, RoutedEventArgs e)
         {
-            for(int i = 0; i < songTitles.Length; i++)
+            //sets index, so song is visibly selected while playing
+            SongList.SelectedIndex = 0;
+
+            //creates and opens Uri for first song
+            Uri music = new Uri(songPaths[0]);
+            musPlayer.Open(music);
+
+            //play uri
+            musPlayer.Play();
+
+            //when song over, call player_MediaEnded function
+            musPlayer.MediaEnded += player_MediaEnded;
+        }
+
+        //function that is called when song is done playing, plays next song
+        //based on function from answer in thread https://stackoverflow.com/questions/10482987/automatically-play-next-item-in-listbox?rq=1
+        void player_MediaEnded(object sender, EventArgs e)
+        {
+            //makes currentSongIndex variable, used to play next song
+            int currentSongIndex = SongList.SelectedIndex;
+
+            currentSongIndex++;
+
+            //loop called until last song is reached
+            if(currentSongIndex < SongList.Items.Count)
             {
-                //ends any previously playing songs
-                musPlayer.Close();
+                //updates index in listbox
+                SongList.SelectedIndex = currentSongIndex;
 
-                //creates new uri based on selected song
-                Uri music = new Uri(songPaths[SongList.SelectedIndex + i]);
-                //player opens uri
-                musPlayer.Open(music);
-
-                //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
-                BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex + i]));
-                //assigns image path to image box
+                //updates album image
+                BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
                 AlbumArt.Source = image;
 
-                //player plays song
+                //updates current song label
+                string songName = songTitles[SongList.SelectedIndex];
+                CurrentSongLabel.Content = "Currently playing: " + songName;
+
+                //creates and opens Uri for next song, plays it
+                Uri music = new Uri(songPaths[currentSongIndex]);
+                musPlayer.Open(music);
+
+
                 musPlayer.Play();
             }
+
+            //at the end of the last song, stop the player
+            else
+            {
+                musPlayer.Close();
+            }
         }
+
 
         //function to move player back one song
         private void PreviousSongButton_Click(object sender, RoutedEventArgs e)
@@ -152,9 +184,8 @@ namespace testApp
                 SongList.SelectedIndex = SongList.SelectedIndex - 1;
             }
 
-            //creates new uri based on new selected song index
+            //creates and opens new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
-            //player opens uri
             musPlayer.Open(music);
 
             //player plays song
@@ -180,9 +211,8 @@ namespace testApp
                 SongList.SelectedIndex = SongList.SelectedIndex + 1;
             }
 
-            //creates new uri based on new selected song index
+            //creates and opens new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
-            //player opens uri
             musPlayer.Open(music);
 
             //player plays song
