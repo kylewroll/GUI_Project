@@ -271,5 +271,36 @@ namespace testApp
         {
             musPlayer.Pause();
         }
+
+        private void VolumeDownButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (musPlayer.Volume == 0)
+            {
+                musPlayer.Volume = 0;
+            }
+
+            else
+            {
+                musPlayer.Volume -= .1;
+            }
+            
+            VolumeLabel.Content = musPlayer.Volume;
+        }
+
+        private void VolumeUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(musPlayer.Volume == 1)
+            {
+                musPlayer.Volume = 1;
+            }
+
+            else
+            {
+                musPlayer.Volume += .1;
+            }
+            
+            VolumeLabel.Content = musPlayer.Volume;
+        }
     }
 }

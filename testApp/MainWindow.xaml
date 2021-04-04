@@ -16,7 +16,10 @@
         <Button x:Name="AddSongArtButton" Content="Add Song Art" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Margin="627,353,0,0" Height="56" Click="AddSongArtButton_Click"/>
         <Button x:Name="PlayAllSongsButton" Content="Play All" Margin="191,305,510,76" IsCancel="True" Click="PlayAllSongsButton_Click"/>
         <Button x:Name="ResumePlayButton" Content="Resume" HorizontalAlignment="Left" Height="36" Margin="114,250,0,0" VerticalAlignment="Top" Width="118" Click="ResumePlayButton_Click"/>
-        <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Height="36" Margin="386,250,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="1.501,0.695" Click="PauseButton_Click"/>
-        <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10"/>
+        <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Height="36" Margin="247,250,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="1.501,0.695" Click="PauseButton_Click"/>
+        <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10" Background="{x:Null}"/>
+        <Button x:Name="VolumeDownButton" Content="-" HorizontalAlignment="Left" Height="35" Margin="377,251,0,0" VerticalAlignment="Top" Width="39" Click="VolumeDownButton_Click"/>
+        <Button x:Name="VolumeUpButton" Content="+" HorizontalAlignment="Left" Height="35" Margin="466,251,0,0" VerticalAlignment="Top" Width="39" Click="VolumeUpButton_Click"/>
+        <Label x:Name="VolumeLabel" Content="0" HorizontalAlignment="Left" Height="35" Margin="421,251,0,0" VerticalAlignment="Top" Width="40"/>
     </Grid>
 </Window>
