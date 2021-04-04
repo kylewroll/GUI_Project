@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace testApp
 {
@@ -35,6 +37,11 @@ namespace testApp
 
         //boolean for determining whether or not images are added
         bool images = false;
+
+        DispatcherTimer timer = new DispatcherTimer();
+        TimeSpan interval = TimeSpan.FromSeconds(1);
+        DateTime start;
+        Stopwatch stopwatch = new Stopwatch();
 
         public MainWindow()
         {
@@ -92,10 +99,16 @@ namespace testApp
 
 
         //function to play currently selected song, and display corresponding art
-        private void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //ends any previously playing songs
             musPlayer.Close();
+
+            timer.Stop();
+            timer.Interval = interval;
+            timer.Tick += OnTimedEvent;
+            start = DateTime.Now;
+            
 
             //creates new uri based on selected song
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
@@ -117,13 +130,44 @@ namespace testApp
 
             //player plays song
             musPlayer.Play();
+
+            //starts timer
+            timer.Start();
+        }   
+
+
+        private void OnTimedEvent(object sender, EventArgs e)
+        {
+            timer.Interval = interval;
+            stopwatch.Restart();
+
+            SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
         }
-                
+
+        /*
+        void UpdateProgressBar(object sender, EventArgs e)
+        {
+            SongProgressBar.Minimum = 0;
+            SongProgressBar.Maximum = musPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+            SongProgressBar.Value = musPlayer.Position.TotalSeconds;
+        }
+
+        private void SongProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SongDurationClock.Text = TimeSpan.FromSeconds(SongProgressBar.Value).ToString(@"hh\:mm\:ss");
+        }
+        */
+
         //function to play all songs from song list, manually plays first song, then loops through rest till end
         private void PlayAllSongsButton_Click(object sender, RoutedEventArgs e)
         {
             //sets index, so song is visibly selected while playing
             SongList.SelectedIndex = 0;
+
+            timer.Stop();
+            timer.Interval = interval;
+            timer.Tick += OnTimedEvent;
+            start = DateTime.Now;
 
             //creates and opens Uri for first song
             Uri music = new Uri(songPaths[0]);
@@ -131,6 +175,8 @@ namespace testApp
 
             //play uri
             musPlayer.Play();
+
+            timer.Start();
 
             //when song over, call player_MediaEnded function
             musPlayer.MediaEnded += player_MediaEnded;
@@ -151,7 +197,12 @@ namespace testApp
                 //updates index in listbox
                 SongList.SelectedIndex = currentSongIndex;
 
-                if(images == true)
+                timer.Stop();
+                timer.Interval = interval;
+                timer.Tick += OnTimedEvent;
+                start = DateTime.Now;
+
+                if (images == true)
                 {
                     //updates album image
                     BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
@@ -169,6 +220,8 @@ namespace testApp
 
 
                 musPlayer.Play();
+
+                timer.Start();
             }
 
             //at the end of the last song, stop the player
@@ -198,12 +251,19 @@ namespace testApp
                 SongList.SelectedIndex = SongList.SelectedIndex - 1;
             }
 
+            timer.Stop();
+            timer.Interval = interval;
+            timer.Tick += OnTimedEvent;
+            start = DateTime.Now;
+
             //creates and opens new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
             musPlayer.Open(music);
 
             //player plays song
             musPlayer.Play();
+
+            timer.Start();
         }
 
         //function to move player forward one song
@@ -225,12 +285,19 @@ namespace testApp
                 SongList.SelectedIndex = SongList.SelectedIndex + 1;
             }
 
+            timer.Stop();
+            timer.Interval = interval;
+            timer.Tick += OnTimedEvent;
+            start = DateTime.Now;
+
             //creates and opens new uri based on new selected song index
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
             musPlayer.Open(music);
 
             //player plays song
             musPlayer.Play();
+
+            timer.Start();
         }
 
 
@@ -283,14 +350,40 @@ namespace testApp
         private void ResumePlayButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Play();
+
+            ToggleTimer();
+
+            //timer.Start();
+
         }
 
         //function to pause current song
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             musPlayer.Pause();
+
+            ToggleTimer();
+
+            //timer.Stop();
         }
 
+        private void ToggleTimer()
+        {
+            if(timer.IsEnabled)
+            {
+                timer.IsEnabled = false;
+                stopwatch.Restart();
+            }
+
+            else
+            {
+                stopwatch.Stop();
+                timer.Interval = interval - stopwatch.Elapsed;
+                timer.IsEnabled = true;
+            }
+        }
+
+        //function to decrease volume by .1, and update volume label, unless volume is at 0
         private void VolumeDownButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -307,6 +400,7 @@ namespace testApp
             VolumeLabel.Content = musPlayer.Volume;
         }
 
+        //function to increase volume by .1, and update volume label, unless volume is at 1
         private void VolumeUpButton_Click(object sender, RoutedEventArgs e)
         {
             if(musPlayer.Volume == 1)
