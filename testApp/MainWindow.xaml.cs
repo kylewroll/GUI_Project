@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.Timers;
 
 namespace testApp
 {
@@ -104,10 +105,15 @@ namespace testApp
             //ends any previously playing songs
             musPlayer.Close();
 
+            DispatcherTimer timer = new DispatcherTimer();
+
             timer.Stop();
             timer.Interval = interval;
+
             timer.Tick += OnTimedEvent;
+
             start = DateTime.Now;
+            
             
 
             //creates new uri based on selected song
@@ -130,18 +136,19 @@ namespace testApp
 
             //player plays song
             musPlayer.Play();
-
+            
             //starts timer
             timer.Start();
+            
         }   
 
-
+        
         private void OnTimedEvent(object sender, EventArgs e)
         {
-            timer.Interval = interval;
-            stopwatch.Restart();
+                timer.Interval = interval;
+                stopwatch.Restart();
 
-            SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
+                SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
         }
 
         /*
@@ -351,10 +358,9 @@ namespace testApp
         {
             musPlayer.Play();
 
-            ToggleTimer();
+            //ToggleTimer();
 
-            //timer.Start();
-
+            timer.Start();
         }
 
         //function to pause current song
@@ -362,9 +368,9 @@ namespace testApp
         {
             musPlayer.Pause();
 
-            ToggleTimer();
+            //ToggleTimer();
 
-            //timer.Stop();
+            timer.Stop();
         }
 
         private void ToggleTimer()
