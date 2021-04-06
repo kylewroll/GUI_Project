@@ -40,15 +40,16 @@ namespace testApp
         bool images = false;
 
         DispatcherTimer timer = new DispatcherTimer();
-        TimeSpan interval = TimeSpan.FromSeconds(1);
+        
         DateTime start;
-        Stopwatch stopwatch = new Stopwatch();
 
         public MainWindow()
         {
             InitializeComponent();
 
             VolumeLabel.Content = musPlayer.Volume;
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += OnTimedEvent;
         }
 
         //function to add songs to listbox
@@ -105,13 +106,7 @@ namespace testApp
             //ends any previously playing songs
             musPlayer.Close();
 
-            DispatcherTimer timer = new DispatcherTimer();
-
             timer.Stop();
-            timer.Interval = interval;
-
-            timer.Tick += OnTimedEvent;
-
             start = DateTime.Now;
             
             
@@ -145,10 +140,7 @@ namespace testApp
         
         private void OnTimedEvent(object sender, EventArgs e)
         {
-                timer.Interval = interval;
-                stopwatch.Restart();
-
-                SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
+            SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
         }
 
         /*
@@ -172,8 +164,6 @@ namespace testApp
             SongList.SelectedIndex = 0;
 
             timer.Stop();
-            timer.Interval = interval;
-            timer.Tick += OnTimedEvent;
             start = DateTime.Now;
 
             //creates and opens Uri for first song
@@ -205,8 +195,6 @@ namespace testApp
                 SongList.SelectedIndex = currentSongIndex;
 
                 timer.Stop();
-                timer.Interval = interval;
-                timer.Tick += OnTimedEvent;
                 start = DateTime.Now;
 
                 if (images == true)
@@ -259,8 +247,6 @@ namespace testApp
             }
 
             timer.Stop();
-            timer.Interval = interval;
-            timer.Tick += OnTimedEvent;
             start = DateTime.Now;
 
             //creates and opens new uri based on new selected song index
@@ -293,8 +279,6 @@ namespace testApp
             }
 
             timer.Stop();
-            timer.Interval = interval;
-            timer.Tick += OnTimedEvent;
             start = DateTime.Now;
 
             //creates and opens new uri based on new selected song index
@@ -360,6 +344,7 @@ namespace testApp
 
             //ToggleTimer();
 
+            //start = DateTime.Now;
             timer.Start();
         }
 
@@ -371,22 +356,6 @@ namespace testApp
             //ToggleTimer();
 
             timer.Stop();
-        }
-
-        private void ToggleTimer()
-        {
-            if(timer.IsEnabled)
-            {
-                timer.IsEnabled = false;
-                stopwatch.Restart();
-            }
-
-            else
-            {
-                stopwatch.Stop();
-                timer.Interval = interval - stopwatch.Elapsed;
-                timer.IsEnabled = true;
-            }
         }
 
         //function to decrease volume by .1, and update volume label, unless volume is at 0
@@ -420,6 +389,46 @@ namespace testApp
             }
             
             VolumeLabel.Content = musPlayer.Volume;
+        }
+
+        private void SortByTitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            SongList.Items.Clear();
+
+            
+
+            for (int i = 0; i < songTitles.Length; i++)
+            {
+                for(int j = 1; j < songTitles.Length - i; j++)
+                {
+                    if (String.Compare(songTitles[j-1], songTitles[j]) > 0)
+                    {
+                        //replace song titles
+                        string titleTemp = songTitles[j-1];
+                        songTitles[j-1] = songTitles[j];
+                        songTitles[j] = titleTemp;
+
+                        //replace song paths (so player doesnt play song originally at [0])
+                        string songPathTemp = songPaths[j-1];
+                        songPaths[j-1] = songPaths[j];
+                        songPaths[j] = songPathTemp;
+
+                        if (images == true)
+                        {
+                            //replace image paths (so images are properly updated)
+                            string imagePathTemp = imagePaths[j-1];
+                            imagePaths[j-1] = imagePaths[j];
+                            imagePaths[j] = imagePathTemp;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < songTitles.Length; i++)
+            {
+                //add song titles to listbox in new order
+                SongList.Items.Add(songTitles[i]);
+            }
         }
     }
 }

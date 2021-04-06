@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="mainScreen">
         <Button x:Name="AddSongsButton" Content="Add Songs" HorizontalAlignment="Left" Height="56" Margin="627,273,0,0" VerticalAlignment="Top" Width="98" Click="AddSongsButton_Click"/>
-        <ListBox x:Name="SongList" HorizontalAlignment="Left" Height="164" Margin="603,87,0,0" VerticalAlignment="Top" Width="145" SelectionChanged="SongList_SelectionChanged"/>
+        <ListBox x:Name="SongList" HorizontalAlignment="Left" Height="164" Margin="603,87,0,0" VerticalAlignment="Top" Width="145" SelectionChanged="SongList_SelectionChanged" AllowDrop="True"/>
         <Button x:Name="NextSongButton" Content="Next &gt;&gt;" Margin="466,305,235,76" IsCancel="True" Click="NextSongButton_Click"/>
         <Button x:Name="PreviousSongButton" Content="&lt;&lt; Previous" Margin="50,305,651,76" IsCancel="True" Click="PreviousSongButton_Click"/>
         <Button x:Name="ShuffleSongsButton" Content="Shuffle" Margin="335,305,366,76" IsCancel="True" Click="ShuffleSongsButton_Click"/>
@@ -24,5 +24,6 @@
         <Label x:Name="Volume" Content="Volume" HorizontalAlignment="Left" Height="21" Margin="416,286,0,0" VerticalAlignment="Top" Width="50" FontSize="10"/>
         <TextBox x:Name="SongDurationClock" HorizontalAlignment="Left" Height="19" Margin="44,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
         <ProgressBar x:Name="SongProgressBar" HorizontalAlignment="Left" Height="22" Margin="126,200,0,0" VerticalAlignment="Top" Width="368"/>
+        <Button x:Name="SortByTitleButton" Content="Title Sort" HorizontalAlignment="Left" Height="25" Margin="627,57,0,0" VerticalAlignment="Top" Width="98" Click="SortByTitleButton_Click"/>
     </Grid>
 </Window>
