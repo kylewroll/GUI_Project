@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Timers;
+using System.IO;
 
 namespace testApp
 {
@@ -56,6 +57,7 @@ namespace testApp
         {
             SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
         }
+
 
         /*
         void UpdateProgressBar(object sender, EventArgs e)

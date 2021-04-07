@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Timers;
+using System.IO;
 
 namespace testApp
 {
@@ -64,6 +65,64 @@ namespace testApp
             {
                 imagePaths = file.FileNames;
                 images = true;
+            }
+        }
+
+        //function to save the songs in the listbox to an outside folder, currently saves as XAML files, goal is to see if it can save music files and images separately,
+        //but at the same time preferably
+        private void SavePlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create new writer for outputting
+            StreamWriter writer;
+            //open dialog to save files
+            SaveFileDialog save = new SaveFileDialog();
+            //makes it so that any previously selected files are not displayed first
+            save.RestoreDirectory = false;
+            //saves as either xaml file, or file
+            save.Filter = "XML File | *.xml | All files | *.*";
+
+            if(save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //initialize writer to wherever is chosed to save
+                writer = new StreamWriter(save.FileName);
+
+                //loop and print out titles, paths, images
+                for(int i = 0; i < SongList.Items.Count; i++)
+                {
+                    writer.WriteLine(songTitles[i]);
+                    writer.WriteLine(songPaths[i]);
+
+                    if(images)
+                    {
+                        writer.WriteLine(imagePaths[i]);
+                    }
+                }
+                //close writer
+                writer.Close();
+            }
+        }
+
+        //function to load a playlist. if save playlist can save music/image files separately, this could be removed, and songs could be added by the add button. right now, reads in xaml file
+        //and adds song path to listbox
+        private void LoadPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create reader to read in file data
+            StreamReader reader;
+            //create dialog to load files
+            OpenFileDialog load = new OpenFileDialog();
+            //prevent selecting multiple playlists in one session
+            load.Multiselect = false;
+            
+            if(load.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //initialize reader with selected loading destination
+                reader = new StreamReader(load.FileName);
+
+                while(reader.Peek() >= 0)
+                {
+                    //add info to list, need this to be song paths to work?
+                    SongList.Items.Add(reader.ReadLine());
+                }
             }
         }
     }

@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Timers;
+using System.IO;
 
 namespace testApp
 {

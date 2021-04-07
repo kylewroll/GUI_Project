@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Timers;
+using System.IO;
 
 namespace testApp
 {
@@ -30,14 +31,12 @@ namespace testApp
             timer.Stop();
             start = DateTime.Now;
 
-
-
             //creates new uri based on selected song
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
             //player opens uri
             musPlayer.Open(music);
 
-            if (images == true)
+            if (images)
             {
                 //conversion based on https://stackoverflow.com/questions/6503424/how-to-programmatically-set-the-image-source
                 BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
@@ -97,7 +96,7 @@ namespace testApp
                 timer.Stop();
                 start = DateTime.Now;
 
-                if (images == true)
+                if (images)
                 {
                     //updates album image
                     BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
