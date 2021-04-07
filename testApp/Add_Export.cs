@@ -38,12 +38,12 @@ namespace testApp
             {
                 songTitles = file.SafeFileNames;
                 songPaths = file.FileNames;
+            }
 
-                //adds song names to listbox
-                for (int i = 0; i < songTitles.Length; i++)
-                {
-                    SongList.Items.Add(songTitles[i]);
-                }
+            //adds song names to listbox
+            for (int i = 0; i < songTitles.Length; i++)
+            {
+                SongList.Items.Add(songTitles[i]);
             }
         }
 
