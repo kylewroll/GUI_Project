@@ -25,9 +25,6 @@ namespace testApp
         //function to move player back one song
         private void PreviousSongButton_Click(object sender, RoutedEventArgs e)
         {
-            //ends any previously playing songs
-            musPlayer.Close();
-
             //if loop for when previous button is pressed on first song
             if (SongList.SelectedIndex == 0)
             {
@@ -40,26 +37,11 @@ namespace testApp
                 //sets selected index backwards 1
                 SongList.SelectedIndex = SongList.SelectedIndex - 1;
             }
-
-            timer.Stop();
-            start = DateTime.Now;
-
-            //creates and opens new uri based on new selected song index
-            Uri music = new Uri(songPaths[SongList.SelectedIndex]);
-            musPlayer.Open(music);
-
-            //player plays song
-            musPlayer.Play();
-
-            timer.Start();
         }
 
         //function to move player forward one song
         private void NextSongButton_Click(object sender, RoutedEventArgs e)
         {
-            //ends any previously playing songs
-            musPlayer.Close();
-
             //if loop for when next is pressed on the last song
             if (SongList.SelectedIndex == SongList.Items.Count - 1)
             {
@@ -72,18 +54,6 @@ namespace testApp
                 //sets selected index forward 1
                 SongList.SelectedIndex = SongList.SelectedIndex + 1;
             }
-
-            timer.Stop();
-            start = DateTime.Now;
-
-            //creates and opens new uri based on new selected song index
-            Uri music = new Uri(songPaths[SongList.SelectedIndex]);
-            musPlayer.Open(music);
-
-            //player plays song
-            musPlayer.Play();
-
-            timer.Start();
         }
 
 
@@ -170,9 +140,16 @@ namespace testApp
             }
         }
 
+
+
         //function to clear lisbox
         private void ClearListButton_Click(object sender, RoutedEventArgs e) 
         {
+            musPlayer.Close();
+            timer.Stop();
+            AlbumArt.Source = null;
+            CurrentSongLabel.Content = " ";
+
             Array.Clear(songTitles, 0, songTitles.Length);
             Array.Clear(songPaths, 0, songPaths.Length);
 

@@ -9,12 +9,12 @@
     <Grid x:Name="mainScreen">
         <Button x:Name="AddSongsButton" Content="Add Songs" HorizontalAlignment="Left" Height="34" Margin="627,256,0,0" VerticalAlignment="Top" Width="98" Click="AddSongsButton_Click"/>
         <ListBox x:Name="SongList" HorizontalAlignment="Left" Height="164" Margin="603,87,0,0" VerticalAlignment="Top" Width="145" SelectionChanged="SongList_SelectionChanged" AllowDrop="True"/>
-        <Button x:Name="NextSongButton" Content="Next &gt;&gt;" Margin="466,305,235,76" IsCancel="True" Click="NextSongButton_Click"/>
+        <Button x:Name="NextSongButton" Content="Next &gt;&gt;" Margin="524,305,177,76" IsCancel="True" Click="NextSongButton_Click"/>
         <Button x:Name="PreviousSongButton" Content="&lt;&lt; Previous" Margin="50,305,651,76" IsCancel="True" Click="PreviousSongButton_Click"/>
-        <Button x:Name="ShuffleSongsButton" Content="Shuffle" Margin="335,305,366,76" IsCancel="True" Click="ShuffleSongsButton_Click"/>
+        <Button x:Name="ShuffleSongsButton" Content="Shuffle" Margin="403,305,298,76" IsCancel="True" Click="ShuffleSongsButton_Click"/>
         <Image x:Name="AlbumArt" HorizontalAlignment="Left" Height="164" Margin="223,26,0,0" VerticalAlignment="Top" Width="164" Stretch="Fill"/>
         <Button x:Name="AddSongArtButton" Content="Add Song Art" HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Margin="627,295,0,0" Height="34" Click="AddSongArtButton_Click"/>
-        <Button x:Name="PlayAllSongsButton" Content="Play All" Margin="191,305,510,76" IsCancel="True" Click="PlayAllSongsButton_Click"/>
+        <Button x:Name="PlayAllSongsButton" Content="Play All" Margin="284,305,417,76" Click="PlayAllSongsButton_Click"/>
         <Button x:Name="ResumePlayButton" Content="Resume" HorizontalAlignment="Left" Height="36" Margin="114,250,0,0" VerticalAlignment="Top" Width="118" Click="ResumePlayButton_Click"/>
         <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Height="36" Margin="247,250,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="1.501,0.695" Click="PauseButton_Click"/>
         <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10" Background="{x:Null}"/>
@@ -28,5 +28,6 @@
         <Button x:Name="ClearListButton" Content="Clear Song List" HorizontalAlignment="Left" Height="25" Margin="627,56,0,0" VerticalAlignment="Top" Width="98" Click="ClearListButton_Click"/>
         <Button x:Name="SavePlaylistButton" Content="Save Playlist" HorizontalAlignment="Left" Height="34" Margin="627,334,0,0" VerticalAlignment="Top" Width="98" Click="SavePlaylistButton_Click"/>
         <Button x:Name="LoadPlaylistButton" Content="Load Playlist" HorizontalAlignment="Left" Height="34" Margin="627,373,0,0" VerticalAlignment="Top" Width="98" Click="LoadPlaylistButton_Click"/>
+        <Button x:Name="PlaySongButton" Content="Play" Margin="168,305,533,76" Click="PlaySongButton_Click"/>
     </Grid>
 </Window>

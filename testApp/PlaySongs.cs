@@ -25,6 +25,11 @@ namespace testApp
         //function to play currently selected song, and display corresponding art
         public void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+        }
+
+        private void PlaySongButton_Click(object sender, RoutedEventArgs e)
+        {
             //ends any previously playing songs
             musPlayer.Close();
 
@@ -47,7 +52,7 @@ namespace testApp
 
             //sets songName variable, and updates CurrentSongLabel to display it
             string songName = songTitles[SongList.SelectedIndex];
-            CurrentSongLabel.Content = "Currently playing: " + songName;
+            CurrentSongLabel.Content = "Currently selected: " + songName;
 
             //player plays song
             musPlayer.Play();
