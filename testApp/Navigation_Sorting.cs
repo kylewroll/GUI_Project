@@ -175,7 +175,12 @@ namespace testApp
         {
             Array.Clear(songTitles, 0, songTitles.Length);
             Array.Clear(songPaths, 0, songPaths.Length);
-            Array.Clear(imagePaths, 0, imagePaths.Length);
+
+            if(images)
+            {
+                Array.Clear(imagePaths, 0, imagePaths.Length);
+            }
+           
 
             SongList.Items.Clear();
         }
