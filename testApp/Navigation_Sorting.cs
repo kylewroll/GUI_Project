@@ -57,8 +57,6 @@ namespace testApp
         }
 
 
-
-
         //function for shuffling loaded songs
         private void ShuffleSongsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -145,11 +143,16 @@ namespace testApp
         //function to clear lisbox
         private void ClearListButton_Click(object sender, RoutedEventArgs e) 
         {
+            //close player
             musPlayer.Close();
+            //stop timer
             timer.Stop();
+            //clear image
             AlbumArt.Source = null;
+            //clear song label
             CurrentSongLabel.Content = " ";
 
+            //clear arrays
             Array.Clear(songTitles, 0, songTitles.Length);
             Array.Clear(songPaths, 0, songPaths.Length);
 
@@ -158,7 +161,7 @@ namespace testApp
                 Array.Clear(imagePaths, 0, imagePaths.Length);
             }
            
-
+            //clear list
             SongList.Items.Clear();
         }
     }

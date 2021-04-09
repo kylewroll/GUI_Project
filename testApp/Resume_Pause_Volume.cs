@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using System.Timers;
 using System.IO;
+using System.Windows.Controls.Primitives;
 
 namespace testApp
 {
@@ -38,37 +39,11 @@ namespace testApp
             timer.Stop();
         }
 
-        //function to decrease volume by .1, and update volume label, unless volume is at 0
-        private void VolumeDownButton_Click(object sender, RoutedEventArgs e)
+        //function to update volume based on volumer slider position
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
-            if (musPlayer.Volume == 0)
-            {
-                musPlayer.Volume = 0;
-            }
-
-            else
-            {
-                musPlayer.Volume -= .1;
-            }
-
-            VolumeLabel.Content = musPlayer.Volume;
+            musPlayer.Volume = e.NewValue;
         }
 
-        //function to increase volume by .1, and update volume label, unless volume is at 1
-        private void VolumeUpButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (musPlayer.Volume == 1)
-            {
-                musPlayer.Volume = 1;
-            }
-
-            else
-            {
-                musPlayer.Volume += .1;
-            }
-
-            VolumeLabel.Content = musPlayer.Volume;
-        }
     }
 }

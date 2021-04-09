@@ -22,19 +22,13 @@ namespace testApp
 {
     public partial class MainWindow : Window
     {
-        //function to play currently selected song, and display corresponding art
-        public void SongList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
+        //function for the play button, restarts timer, loads image, updates song label, and plays song
         private void PlaySongButton_Click(object sender, RoutedEventArgs e)
         {
             //ends any previously playing songs
             musPlayer.Close();
 
             timer.Stop();
-            start = DateTime.Now;
 
             //creates new uri based on selected song
             Uri music = new Uri(songPaths[SongList.SelectedIndex]);
@@ -54,6 +48,9 @@ namespace testApp
             string songName = songTitles[SongList.SelectedIndex];
             CurrentSongLabel.Content = "Currently selected: " + songName;
 
+            //subscribe to MusPlayer_MediaOpened event handler
+            musPlayer.MediaOpened += MusPlayer_MediaOpened;
+
             //player plays song
             musPlayer.Play();
 
@@ -68,13 +65,13 @@ namespace testApp
             SongList.SelectedIndex = 0;
 
             timer.Stop();
-            start = DateTime.Now;
 
             //creates and opens Uri for first song
             Uri music = new Uri(songPaths[0]);
             musPlayer.Open(music);
 
-            //play uri
+            musPlayer.MediaOpened += MusPlayer_MediaOpened;
+
             musPlayer.Play();
 
             timer.Start();
@@ -99,7 +96,6 @@ namespace testApp
                 SongList.SelectedIndex = currentSongIndex;
 
                 timer.Stop();
-                start = DateTime.Now;
 
                 if (images)
                 {
@@ -107,7 +103,6 @@ namespace testApp
                     BitmapImage image = new BitmapImage(new Uri(imagePaths[SongList.SelectedIndex]));
                     AlbumArt.Source = image;
                 }
-
 
                 //updates current song label
                 string songName = songTitles[SongList.SelectedIndex];
@@ -117,6 +112,7 @@ namespace testApp
                 Uri music = new Uri(songPaths[currentSongIndex]);
                 musPlayer.Open(music);
 
+                musPlayer.MediaOpened += MusPlayer_MediaOpened;
 
                 musPlayer.Play();
 
@@ -128,6 +124,14 @@ namespace testApp
             {
                 musPlayer.Close();
             }
+        }
+
+        //event that is called when media opens
+        private void MusPlayer_MediaOpened(object sender, EventArgs e)
+        {
+            TotalSongLength.Text = musPlayer.NaturalDuration.TimeSpan.ToString();
+            SongProgressBar.Maximum = musPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+
         }
     }
 }

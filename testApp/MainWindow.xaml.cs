@@ -40,37 +40,26 @@ namespace testApp
         //boolean for determining whether or not images are added
         bool images = false;
 
+        //timer for tracking the song's progress
         DispatcherTimer timer = new DispatcherTimer();
-        
-        DateTime start;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            VolumeLabel.Content = musPlayer.Volume;
+            //set time span to seconds
             timer.Interval = TimeSpan.FromSeconds(1);
+            //subscrive to OnTimedEvent
             timer.Tick += OnTimedEvent;
         }
 
+        //event that timer.Tick is subscribed to, updates label using system clock, leads to timer updated for paused time after resume button is pressed
         private void OnTimedEvent(object sender, EventArgs e)
         {
-            SongDurationClock.Text = Convert.ToString(DateTime.Now - start);
-        }
-
-
-        /*
-        void UpdateProgressBar(object sender, EventArgs e)
-        {
-            SongProgressBar.Minimum = 0;
-            SongProgressBar.Maximum = musPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+            //update progress bar with position of media
             SongProgressBar.Value = musPlayer.Position.TotalSeconds;
+            //update clock textbox with position of media
+            SongDurationClock.Text = Convert.ToString(musPlayer.Position);
         }
-
-        private void SongProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            SongDurationClock.Text = TimeSpan.FromSeconds(SongProgressBar.Value).ToString(@"hh\:mm\:ss");
-        }
-        */
     }
 }
