@@ -20,14 +20,14 @@
         <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Height="36" Margin="247,250,0,0" VerticalAlignment="Top" Width="118" RenderTransformOrigin="1.501,0.695" Click="PauseButton_Click"/>
         <Label x:Name="CurrentSongLabel" Content="" HorizontalAlignment="Left" Height="23" Margin="114,222,0,0" VerticalAlignment="Top" Width="390" FontSize="10" Background="{x:Null}"/>
         <Label x:Name="VolumeText" Content="Volume:" HorizontalAlignment="Left" Height="21" Margin="384,256,0,0" VerticalAlignment="Top" Width="50" FontSize="10"/>
-        <TextBox x:Name="SongDurationClock" HorizontalAlignment="Left" Height="22" Margin="50,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
-        <ProgressBar x:Name="SongProgressBar" HorizontalAlignment="Left" Height="22" Margin="126,200,0,0" VerticalAlignment="Top" Width="368"/>
+        <TextBox x:Name="SongDurationClock" HorizontalAlignment="Left" Height="22" Margin="50,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65" BorderBrush="{x:Null}"/>
+        <ProgressBar x:Name="SongProgressBar" HorizontalAlignment="Left" Foreground="Coral" Height="22" Margin="126,200,0,0" VerticalAlignment="Top" Width="368"/>
         <Button x:Name="SortByTitleButton" Content="Title Sort" HorizontalAlignment="Left" Height="25" Margin="627,26,0,0" VerticalAlignment="Top" Width="98" Click="SortByTitleButton_Click"/>
         <Button x:Name="ClearListButton" Content="Clear Song List" HorizontalAlignment="Left" Height="25" Margin="627,56,0,0" VerticalAlignment="Top" Width="98" Click="ClearListButton_Click"/>
         <Button x:Name="SavePlaylistButton" Content="Save Playlist" HorizontalAlignment="Left" Height="34" Margin="627,334,0,0" VerticalAlignment="Top" Width="98" Click="SavePlaylistButton_Click"/>
         <Button x:Name="LoadPlaylistButton" Content="Load Playlist" HorizontalAlignment="Left" Height="34" Margin="627,373,0,0" VerticalAlignment="Top" Width="98" Click="LoadPlaylistButton_Click"/>
         <Button x:Name="PlaySongButton" Content="Play" Margin="168,305,533,76" Click="PlaySongButton_Click"/>
         <Slider x:Name="VolumeSlider" HorizontalAlignment="Left" ValueChanged="VolumeSlider_ValueChanged" Height="34" Margin="434,258,0,0" VerticalAlignment="Top" Width="79" Maximum="1" TickFrequency="0.1" TickPlacement="BottomRight" Value="0.5"/>
-        <TextBox x:Name="TotalSongLength" HorizontalAlignment="Left" Height="22" Margin="499,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
+        <TextBox x:Name="TotalSongLength" HorizontalAlignment="Left" Height="22" Margin="499,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>
