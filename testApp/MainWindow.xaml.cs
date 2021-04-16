@@ -89,5 +89,7 @@ namespace testApp
             Toolbar darkToolbar = darkTheme.MakeToolbar(ButtonBar);
             SongLabel darkSongLabel = darkTheme.MakeSongLabel(CurrentSongLabel);
         }
+
+        
     }
 }

@@ -144,7 +144,96 @@ namespace testApp
             }
         }
 
+        //function that moves selected song up one position in the list
+        private void MoveSongUp_Click(object sender, RoutedEventArgs e)
+        {
+            //do nothing if song is at top of list
+            if(SongList.SelectedIndex == 0)
+            {
+                return;
+            }
 
+            else
+            {
+                //store selection to be updated at end
+                int selection = SongList.SelectedIndex;
+
+                //update song titles array
+                string songTitleTemp = songTitles[selection - 1];
+                songTitles[selection - 1] = songTitles[selection];
+                songTitles[selection] = songTitleTemp;
+
+                //update song paths array
+                string songPathTemp = songPaths[selection - 1];
+                songPaths[selection - 1] = songPaths[selection];
+                songPaths[selection] = songPathTemp;
+
+                //update image paths array
+                if (images)
+                {
+                    string imagePathTemp = imagePaths[selection - 1];
+                    imagePaths[selection - 1] = imagePaths[selection];
+                    imagePaths[selection] = imagePathTemp;
+                }
+
+                //clear and repopulate song list
+                SongList.Items.Clear();
+
+                for (int i = 0; i < songTitles.Length; i++)
+                {
+                    SongList.Items.Add(songTitles[i]);
+                }
+
+                //adjust selected index down one
+                SongList.SelectedIndex = selection - 1;
+            }
+
+        }
+
+        //function that moves selected song down one position in the list
+        private void MoveSongDown_Click(object sender, RoutedEventArgs e)
+        {
+            //do nothing if song is at bottom of list
+            if (SongList.SelectedIndex == SongList.Items.Count - 1)
+            {
+                return;
+            }
+
+            else
+            {
+                //index stored so that the selection can be adjusted after moving
+                int selection = SongList.SelectedIndex;
+
+                //update song title array
+                string songTitleTemp = songTitles[selection + 1];
+                songTitles[selection + 1] = songTitles[selection];
+                songTitles[selection] = songTitleTemp;
+
+                //update song path array
+                string songPathTemp = songPaths[selection + 1];
+                songPaths[selection + 1] = songPaths[selection];
+                songPaths[selection] = songPathTemp;
+
+                //update image path array
+                if (images)
+                {
+                    string imagePathTemp = imagePaths[selection + 1];
+                    imagePaths[selection + 1] = imagePaths[selection];
+                    imagePaths[selection] = imagePathTemp;
+                }
+
+                //clear and repopulate song list
+                SongList.Items.Clear();
+
+                for (int i = 0; i < songTitles.Length; i++)
+                {
+                    SongList.Items.Add(songTitles[i]);
+                }
+
+                //adjust selected index up one
+                SongList.SelectedIndex = selection + 1;
+            }
+        }
 
         //function to clear lisbox
         private void ClearListButton_Click(object sender, RoutedEventArgs e) 
@@ -157,6 +246,12 @@ namespace testApp
             AlbumArt.Source = null;
             //clear song label
             CurrentSongLabel.Content = " ";
+            //clear song clock
+            SongDurationClock.Text = " ";
+            //clear total song length
+            TotalSongLength.Text = " ";
+            //reset song progress bar
+            SongProgressBar.Value = 0;
 
             //clear arrays
             Array.Clear(songTitles, 0, songTitles.Length);
