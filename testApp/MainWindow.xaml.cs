@@ -111,13 +111,21 @@ namespace testApp
                 return;
             }
 
+
+            if (images == false)
+            {
+                CurrentSongLabel.Content = "Please select add an image to this song, and try again.";
+                songLabelClick = true;
+                return;
+            }
+
             //create info display interface
             InfoDisplay showSongInfo = new SongInfoDisplay();
 
             //call print info from SongInfoDisplay
             showSongInfo.PrintInfo(CurrentSongLabel);
 
-            //use showSongInfo to create new decorated info item
+            //use showSongInfo to create new decorated info item, function built to work with images
             DecoratedInfo decoratedInfo = new DecoratedInfo(showSongInfo, CurrentSongLabel, songTitles[selection], songPaths[selection], imagePaths[selection]);
 
             //call decorated info's functions to update label

@@ -31,6 +31,9 @@ namespace testApp
         //function to add songs to listbox
         private void AddSongsButton_Click(object sender, RoutedEventArgs e)
         {
+            //clears song list, so previously added songs don't stay on the list to be selected, and break things when chosen
+            SongList.Items.Clear();
+
             //opens file window to add songs
             OpenFileDialog file = new OpenFileDialog();
 

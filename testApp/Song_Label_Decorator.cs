@@ -86,9 +86,25 @@ namespace testApp
             {
                 int takeUntil = songTitle.IndexOf(".mp3");
 
-                string titleNoExt = songTitle.Substring(0, takeUntil);
+                //if .mp3 found, remove and add new title to content
+                if (takeUntil != -1)
+                {
+                    string titleNoExt = songTitle.Substring(0, takeUntil);
 
-                label.Content += "Song Title: " + titleNoExt + '\n';
+                    label.Content += "Song Title: " + titleNoExt + '\n';
+                }
+
+                //if .mp3 not found, find .wma, remove and add to content
+                else
+                {
+                    takeUntil = songTitle.IndexOf(".wma");
+                    string titleNoExt = songTitle.Substring(0, takeUntil);
+
+                    label.Content += "Song Title: " + titleNoExt + '\n';
+                }
+                
+
+                
             }
 
             //adds song path to label
