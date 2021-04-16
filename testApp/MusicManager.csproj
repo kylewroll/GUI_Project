@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Interface_Factory.cs" />
     <Compile Include="Resume_Pause_Volume.cs" />
+    <Compile Include="Song_Label_Decorator.cs" />
     <Compile Include="Theme_Creator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

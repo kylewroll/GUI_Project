@@ -136,7 +136,6 @@ namespace testApp
         {
             TotalSongLength.Text = musPlayer.NaturalDuration.TimeSpan.ToString();
             SongProgressBar.Maximum = musPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-
         }
     }
 }

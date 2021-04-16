@@ -45,6 +45,8 @@ namespace testApp
         //boolean for determining whether or not images are added
         bool images = false;
 
+        bool songLabelClick = false;
+
         //timer for tracking the song's progress
         DispatcherTimer timer = new DispatcherTimer();
 
@@ -90,6 +92,40 @@ namespace testApp
             SongLabel darkSongLabel = darkTheme.MakeSongLabel(CurrentSongLabel);
         }
 
-        
+        //function that is called when the label is left clicked, if it's not displaying song information, the label swaps to showing the info. If it is showing the info, it swaps back to
+        //showing the name from the song list
+        private void CurrentSongLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //store index for easier user
+            int selection = SongList.SelectedIndex;
+
+            //swap back to song list name, and change boolean so that it will display info on next click
+            if (songLabelClick)
+            {
+                string songName = songTitles[selection];
+                CurrentSongLabel.Content = "Currently playing: " + songName;
+
+                songLabelClick = false;
+
+                return;
+            }
+
+            //create info display interface
+            InfoDisplay showSongInfo = new SongInfoDisplay();
+
+            //call print info from SongInfoDisplay
+            showSongInfo.PrintInfo(CurrentSongLabel);
+
+            //use showSongInfo to create new decorated info item
+            DecoratedInfo decoratedInfo = new DecoratedInfo(showSongInfo, CurrentSongLabel, songTitles[selection], songPaths[selection], imagePaths[selection]);
+
+            //call decorated info's functions to update label
+            decoratedInfo.GetSongTitle();
+            decoratedInfo.GetSongPath();
+            decoratedInfo.GetImagePath();
+
+            //change boolean to it will display song list name on next click
+            songLabelClick = true;
+        }
     }
 }
