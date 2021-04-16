@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Authors: Kyle Rolland, Andrew Marshall
+ * Date: 4/6/2021
+ * File: Navigation_Sorting.cs
+ * Description: Contains functions that relate to sorting or moving songs, or moving through song list
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

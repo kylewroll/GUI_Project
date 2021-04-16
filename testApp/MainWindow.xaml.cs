@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Authors: Kyle Rolland, Andrew Marshall
+ * Date: 4/1/2021
+ * File: MainWindow.cs
+ * Description: Contains global variables used throughout the application, initialized application, contains smaller functions that don't have a good place to be put
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,6 +65,29 @@ namespace testApp
             SongProgressBar.Value = musPlayer.Position.TotalSeconds;
             //update clock textbox with position of media
             SongDurationClock.Text = Convert.ToString(musPlayer.Position);
+        }
+
+        //function called when light theme button is pressed
+        private void LightThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            //creates light theme user interface
+            UserInterface lightTheme = new CreateLightUserInterface();
+
+            //returned values aren't used, just needed them to properly access the functions to make the changes
+            UIBackground lightBackground = lightTheme.MakeBackground(mainScreen);
+            Toolbar lightToolbar = lightTheme.MakeToolbar(ButtonBar);
+            SongLabel lightSongLabel = lightTheme.MakeSongLabel(CurrentSongLabel);
+        }
+
+        //function called when dark theme button is pressed
+        private void DarkThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            //creates dark theme user interface
+            UserInterface darkTheme = new CreateDarkUserInterface();
+
+            UIBackground darkBackground = darkTheme.MakeBackground(mainScreen);
+            Toolbar darkToolbar = darkTheme.MakeToolbar(ButtonBar);
+            SongLabel darkSongLabel = darkTheme.MakeSongLabel(CurrentSongLabel);
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Authors: Kyle Rolland, Andrew Marshall
+ * Date: 4/6/2021
+ * File: Add_Export.cs
+ * Description: Contains functions that relate to adding songs, images, etc, or moving them
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

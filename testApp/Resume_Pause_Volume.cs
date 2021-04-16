@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Authors: Kyle Rolland, Andrew Marshall
+ * Date: 4/6/2021
+ * File: Resume_Pause_Volume.cs
+ * Description: Contains functions that relate to The pause/resume buttons and volume buttons
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +49,5 @@ namespace testApp
         {
             musPlayer.Volume = e.NewValue;
         }
-
     }
 }

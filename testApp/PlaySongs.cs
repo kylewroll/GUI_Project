@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Authors: Kyle Rolland, Andrew Marshall
+ * Date: 4/6/2021
+ * File: PlaySongs.cs
+ * Description: Contains functions that relate to playing songs
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
