@@ -45,6 +45,7 @@ namespace testApp
         //boolean for determining whether or not images are added
         bool images = false;
 
+        //boolean for determining whether songLabel is clicked, starts out false
         bool songLabelClick = false;
 
         //timer for tracking the song's progress
