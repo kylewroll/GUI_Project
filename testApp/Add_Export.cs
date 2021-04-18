@@ -45,11 +45,12 @@ namespace testApp
             //adds song name and path to their respective arrays
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                songTitles = (file.SafeFileNames);
+                songTitles = file.SafeFileNames;
                 songPaths = file.FileNames;
             }
 
-            //adds song names to listbox
+
+
             for (int i = 0; i < songTitles.Length; i++)
             {
                 SongList.Items.Add(songTitles[i]);

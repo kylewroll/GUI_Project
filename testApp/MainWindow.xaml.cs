@@ -42,6 +42,9 @@ namespace testApp
         //array for paths to image files in folder
         string[] imagePaths;
 
+        string[] titleTemp;
+        string[] pathTemp;
+
         //boolean for determining whether or not images are added
         bool images = false;
 
