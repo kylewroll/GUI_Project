@@ -36,14 +36,14 @@ namespace testApp
         MediaPlayer musPlayer = new MediaPlayer();
 
         //array for song titles
-        string[] songTitles;
+        string[] songTitles = new string[0];
         //array for paths to song files in folder
-        string[] songPaths;
+        string[] songPaths = new string[0];
         //array for paths to image files in folder
-        string[] imagePaths;
+        string[] imagePaths = new string[0];
 
         string[] titleTemp;
-        string[] pathTemp;
+        string[] songPathTemp;
 
         //boolean for determining whether or not images are added
         bool images = false;

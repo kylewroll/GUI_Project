@@ -49,8 +49,6 @@ namespace testApp
                 songPaths = file.FileNames;
             }
 
-
-
             for (int i = 0; i < songTitles.Length; i++)
             {
                 SongList.Items.Add(songTitles[i]);
