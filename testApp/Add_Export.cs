@@ -114,12 +114,12 @@ namespace testApp
 
             //makes it so that any previously selected files are not displayed first
             save.RestoreDirectory = false;
-            //saves as either xaml file, or file
+            //saves as xaml file
             save.Filter = "XML File | *.xml | All files | *.*";
 
             if(save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                //initialize writer to wherever is chosed to save
+                //initialize writer to wherever user chooses to save
                 writer = new StreamWriter(save.FileName);
 
                 //loop and print out titles, paths, images
