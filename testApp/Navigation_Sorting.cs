@@ -235,13 +235,41 @@ namespace testApp
             }
         }
 
-        //function to clear lisbox
+        //function to clear one song from list
+        private void Remove_Song_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //if no song selected, return
+            if (SongList.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            //store for readability
+            int selection = SongList.SelectedIndex;
+
+            //clear 1 item each array at selected index, item cleared is selected item
+            Array.Clear(songTitles, selection, 1);
+            Array.Clear(songPaths, selection, 1);
+            Array.Clear(imagePaths, selection, 1);
+
+            //clear listbox to update with new information, tried just removing the 1 item, but box didn't update properly
+            SongList.Items.Clear();
+
+            //add titles back to list
+            for (int i = 0; i < songTitles.Length; i++)
+            {
+                SongList.Items.Add(songTitles[i]);
+            }
+        }
+
+        //function to clear lisbox and all songs/images
         private void ClearListButton_Click(object sender, RoutedEventArgs e) 
         {
             //close player
             musPlayer.Close();
             //stop timer
             timer.Stop();
+
             //clear image
             AlbumArt.Source = null;
             //clear song label

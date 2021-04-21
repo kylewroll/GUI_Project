@@ -32,18 +32,16 @@ namespace testApp
     {
         //Design and code for adding/playing music based off of tutorial by Vijay Thapa: https://www.youtube.com/watch?v=wjmU28ukjwA
 
+        const int maxSongs = 1000;
         //creates music player
         MediaPlayer musPlayer = new MediaPlayer();
 
         //array for song titles
-        string[] songTitles = new string[0];
+        string[] songTitles = new string[maxSongs];
         //array for paths to song files in folder
-        string[] songPaths = new string[0];
+        string[] songPaths = new string[maxSongs];
         //array for paths to image files in folder
-        string[] imagePaths = new string[0];
-
-        string[] titleTemp;
-        string[] songPathTemp;
+        string[] imagePaths = new string[maxSongs];
 
         //boolean for determining whether or not images are added
         bool images = false;
@@ -139,5 +137,8 @@ namespace testApp
             //change boolean to it will display song list name on next click
             songLabelClick = true;
         }
+
+
+        
     }
 }
