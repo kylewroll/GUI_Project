@@ -244,15 +244,30 @@ namespace testApp
                 return;
             }
 
-            //store for readability
-            int selection = SongList.SelectedIndex;
+            //if last item is selected, resize arrays down 1
+            if(SongList.SelectedIndex == SongList.Items.Count - 1)
+            {
+                Array.Resize(ref songTitles, songTitles.Length - 1);
+                Array.Resize(ref songPaths, songPaths.Length - 1);
+                Array.Resize(ref imagePaths, imagePaths.Length - 1);
+            }
 
-            //clear 1 item each array at selected index, item cleared is selected item
-            Array.Clear(songTitles, selection, 1);
-            Array.Clear(songPaths, selection, 1);
-            Array.Clear(imagePaths, selection, 1);
+            //anything else selected, take next index and set equal to current, effectively moving all songs up 1, then resize arrays down 1
+            else
+            {
+                for (int i = SongList.SelectedIndex; i < SongList.Items.Count - 1; i++)
+                {
+                    songTitles[i] = songTitles[i + 1];
+                    songPaths[i] = songPaths[i + 1];
+                    imagePaths[i] = imagePaths[i + 1];
+                }
 
-            //clear listbox to update with new information, tried just removing the 1 item, but box didn't update properly
+                Array.Resize(ref songTitles, songTitles.Length - 1);
+                Array.Resize(ref songPaths, songPaths.Length - 1);
+                Array.Resize(ref imagePaths, imagePaths.Length - 1);
+            }
+            
+            //clear listbox to update with new information
             SongList.Items.Clear();
 
             //add titles back to list

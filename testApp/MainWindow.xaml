@@ -20,8 +20,11 @@
         <TextBox x:Name="TotalSongLength" HorizontalAlignment="Left" Height="22" Margin="506,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" BorderBrush="{x:Null}"/>
 
 
-        <ToolBar x:Name="ButtonBar" HorizontalAlignment="Left" Height="28" Margin="50,381,0,0" VerticalAlignment="Top" Width="583" Background="White">
+        <ToolBar x:Name="ButtonBar" HorizontalAlignment="Left" Height="28" Margin="50,391,0,0" VerticalAlignment="Top" Width="685" Background="White">
             <Button x:Name="PlaySongButton" Content="Play Song" Click="PlaySongButton_Click"/>
+            <Separator/>
+            <Button x:Name="Play_All_Button" Content="Play All" Click="PlayAllSongsButton_Click"/>
+            <Button x:Name="Shuffle_Songs_Button" Content="Shuffle" Click="ShuffleSongsButton_Click"/>
             <Separator/>
             <Button x:Name="ResumePlayButton" Content="Resume" Click="ResumePlayButton_Click"/>
             <Button x:Name="PauseButton" Content="Pause" Click="PauseButton_Click"/>
@@ -38,13 +41,10 @@
 
         <Button x:Name="LightThemeButton" Content="Light Theme" HorizontalAlignment="Left" Height="25" Margin="26,26,0,0" VerticalAlignment="Top" Width="75" Click="LightThemeButton_Click"/>
         <Button x:Name="DarkThemeButton" Content="Dark Theme" HorizontalAlignment="Left" Height="25" Margin="26,56,0,0" VerticalAlignment="Top" Width="75" Click="DarkThemeButton_Click"/>
-        <Button x:Name="MoveSongUp" Content="Song Up" HorizontalAlignment="Left" Height="25" Margin="690,197,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongUp_Click"/>
-        <Button x:Name="MoveSongDown" Content="Song Down" HorizontalAlignment="Left" Height="25" Margin="690,227,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongDown_Click"/>
-        <Button x:Name="Remove_Song_Button" Content="Remove Song" HorizontalAlignment="Left" Height="25" Margin="690,137,0,0" VerticalAlignment="Top" Width="80" Click="Remove_Song_Button_Click"/>
-        <Button x:Name="Change_Image_Button" Content="Change Art" HorizontalAlignment="Left" Height="25" Margin="690,167,0,0" VerticalAlignment="Top" Width="80" Click="Change_Image_Button_Click"/>
-        <Button x:Name="Play_All_Button" Content="Play All" HorizontalAlignment="Left" Height="25" Margin="690,77,0,0" VerticalAlignment="Top" Width="80" Click="PlayAllSongsButton_Click"/>
-        <Button x:Name="Shuffle_Songs_Button" Content="Shuffle" HorizontalAlignment="Left" Height="25" Width="80" Margin="690,107,0,0" VerticalAlignment="Top" Click="ShuffleSongsButton_Click"/>
-
+        <Button x:Name="MoveSongUp" Content="Song Up" HorizontalAlignment="Left" Height="25" Margin="690,182,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongUp_Click"/>
+        <Button x:Name="MoveSongDown" Content="Song Down" HorizontalAlignment="Left" Height="25" Margin="690,226,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongDown_Click"/>
+        <Button x:Name="Remove_Song_Button" Content="Remove Song" HorizontalAlignment="Left" Height="25" Margin="690,87,0,0" VerticalAlignment="Top" Width="80" Click="Remove_Song_Button_Click"/>
+        <Button x:Name="Change_Image_Button" Content="Change Art" HorizontalAlignment="Left" Height="25" Margin="690,138,0,0" VerticalAlignment="Top" Width="80" Click="Change_Image_Button_Click"/>
     </Grid>
 
 
