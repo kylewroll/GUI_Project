@@ -41,10 +41,10 @@
 
         <Button x:Name="LightThemeButton" Content="Light Theme" HorizontalAlignment="Left" Height="25" Margin="26,26,0,0" VerticalAlignment="Top" Width="75" Click="LightThemeButton_Click"/>
         <Button x:Name="DarkThemeButton" Content="Dark Theme" HorizontalAlignment="Left" Height="25" Margin="26,56,0,0" VerticalAlignment="Top" Width="75" Click="DarkThemeButton_Click"/>
-        <Button x:Name="MoveSongUp" Content="Song Up" HorizontalAlignment="Left" Height="25" Margin="690,182,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongUp_Click"/>
+        <Button x:Name="MoveSongUp" Content="Song Up" HorizontalAlignment="Left" Height="25" Margin="690,180,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongUp_Click"/>
         <Button x:Name="MoveSongDown" Content="Song Down" HorizontalAlignment="Left" Height="25" Margin="690,226,0,0" VerticalAlignment="Top" Width="80" Click="MoveSongDown_Click"/>
         <Button x:Name="Remove_Song_Button" Content="Remove Song" HorizontalAlignment="Left" Height="25" Margin="690,87,0,0" VerticalAlignment="Top" Width="80" Click="Remove_Song_Button_Click"/>
-        <Button x:Name="Change_Image_Button" Content="Change Art" HorizontalAlignment="Left" Height="25" Margin="690,138,0,0" VerticalAlignment="Top" Width="80" Click="Change_Image_Button_Click"/>
+        <Button x:Name="Change_Image_Button" Content="Change Art" HorizontalAlignment="Left" Height="25" Margin="690,134,0,0" VerticalAlignment="Top" Width="80" Click="Change_Image_Button_Click"/>
     </Grid>
 
 
