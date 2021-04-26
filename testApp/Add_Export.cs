@@ -41,14 +41,41 @@ namespace testApp
             file.Filter = file.Filter = "All Supported Audio | *.mp3; *.wma | MP3s | *.mp3 | WMAs | *.wma";
             //allows for selection of multiple songs
             file.Multiselect = true;
-
+            
             //adds song name and path to their respective arrays
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                songTitles = file.SafeFileNames;
-                songPaths = file.FileNames;
+                tempTitles = file.SafeFileNames;
+                tempSongPaths = file.FileNames;
             }
 
+            //if array is default, set it equal to temp
+            if (songTitles.Length == 1000)
+            {
+                songTitles = tempTitles;
+                songPaths = tempSongPaths;
+            }
+
+            //otherwise resize arrays and copy temp to the new array, allows user to select multiple files to add, and properly adds them. kinda of tough to figure out, and janky, seems like c#
+            //was built around lists, so doing this with arrays was a hassle
+            else
+            {
+                int oldLength = songTitles.Length;
+
+                Array.Resize(ref songTitles, oldLength + tempTitles.Length);
+                Array.Copy(tempTitles, 0, songTitles, oldLength, tempTitles.Length);
+
+                Array.Resize(ref songPaths, oldLength + tempSongPaths.Length);
+                Array.Copy(tempSongPaths, 0, songPaths, oldLength, tempTitles.Length);
+            }
+            
+            //prevents crashing when closing dialog without selection
+            if (songTitles == null)
+            {
+                return;
+            }
+
+            //add items to list box
             for (int i = 0; i < songTitles.Length; i++)
             {
                 SongList.Items.Add(songTitles[i]);
@@ -68,12 +95,36 @@ namespace testApp
             //allows for selection of multiple images
             file.Multiselect = true;
 
+            
             //adds image path to imagePaths array
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                imagePaths = file.FileNames;
-                images = true;
+                tempImagePaths = file.FileNames;
             }
+
+            //if array is default, set it equal to temp
+            if (imagePaths.Length == 1000)
+            {
+                imagePaths = tempImagePaths;
+            }
+
+            //otherwise resize and copy
+            else
+            {
+                int oldLength = imagePaths.Length;
+
+                Array.Resize(ref imagePaths, oldLength + tempImagePaths.Length);
+                Array.Copy(tempImagePaths, 0, imagePaths, oldLength, tempImagePaths.Length);
+            }
+
+            //prevents program from crashing if you close out of file dialog without selecting
+            if(imagePaths == null)
+            {
+                return;
+            }
+
+            //set images to true
+            images = true;
         }
 
         //function for changing the art of a specific song
@@ -101,6 +152,12 @@ namespace testApp
             {
                 imagePaths[selection] = file.FileName;
                 images = true;
+            }
+
+            //more crash prevention
+            if (imagePaths == null)
+            {
+                return;
             }
         }
 
@@ -142,12 +199,6 @@ namespace testApp
         //and adds song path to listbox
         private void LoadPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
-            //clear song list and arrays, mostly to keep things from combining and wreaking havoc and the like
-            SongList.Items.Clear();
-            Array.Clear(songTitles, 0, songTitles.Length);
-            Array.Clear(songPaths, 0, songPaths.Length);
-            Array.Clear(imagePaths, 0, imagePaths.Length);
-
             //songNum for storing data properly
             int songNum = 0;
 
@@ -181,8 +232,34 @@ namespace testApp
                     songNum++;
                 }
 
+                //close reader
+                reader.Close();
+
+                //clear image
+                AlbumArt.Source = null;
+                //clear song label
+                CurrentSongLabel.Content = " ";
+                //clear song clock
+                SongDurationClock.Text = " ";
+                //clear total song length
+                TotalSongLength.Text = " ";
+                //reset song progress bar
+                SongProgressBar.Value = 0;
+
+                //resize arrays, in case playlist has less songs previously added
+                Array.Resize(ref songTitles, songNum);
+                Array.Resize(ref songPaths, songNum);
+
+                if (images)
+                {
+                    Array.Resize(ref imagePaths, songNum);
+                }
+
+                //clear list
+                SongList.Items.Clear();
+
                 //store loaded info into list box
-                for(int i = 0; i < songTitles.Length; i++)
+                for (int i = 0; i < songTitles.Length; i++)
                 {
                     SongList.Items.Add(songTitles[i]);
                 }

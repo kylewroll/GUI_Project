@@ -20,7 +20,7 @@
         <TextBox x:Name="TotalSongLength" HorizontalAlignment="Left" Height="22" Margin="506,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" BorderBrush="{x:Null}"/>
 
 
-        <ToolBar x:Name="ButtonBar" HorizontalAlignment="Left" Height="28" Margin="50,391,0,0" VerticalAlignment="Top" Width="685" Background="White">
+        <ToolBar x:Name="ButtonBar" HorizontalAlignment="Left" Height="28" Margin="57,381,0,0" VerticalAlignment="Top" Width="685" Background="White">
             <Button x:Name="PlaySongButton" Content="Play Song" Click="PlaySongButton_Click"/>
             <Separator/>
             <Button x:Name="Play_All_Button" Content="Play All" Click="PlayAllSongsButton_Click"/>

@@ -52,6 +52,10 @@ namespace testApp
         //timer for tracking the song's progress
         DispatcherTimer timer = new DispatcherTimer();
 
+        string[] tempTitles;
+        string[] tempSongPaths;
+        string[] tempImagePaths;
+
         public MainWindow()
         {
             InitializeComponent();
