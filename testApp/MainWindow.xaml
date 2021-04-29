@@ -32,8 +32,8 @@
             <Button x:Name="PreviousSongButton" Content="&lt;&lt; Previous" IsCancel="True" Click="PreviousSongButton_Click"/>
             <Button x:Name="NextSongButton" Content="Next &gt;&gt;"  IsCancel="True" Click="NextSongButton_Click"/>
             <Separator/>
-            <Button x:Name="SavePlaylistButton" Content="Save Playlist" Click="SavePlaylistButton_Click"/>
-            <Button x:Name="LoadPlaylistButton" Content="Load Playlist" Click="LoadPlaylistButton_Click"/>
+            <Button x:Name="SavePlaylistButton" Content="Save Playlist" Click="SavePlaylistButton_Click" ToolTip="Please ensure songs have images before saving play list"/>
+            <Button x:Name="LoadPlaylistButton" Content="Load Playlist" Click="LoadPlaylistButton_Click" ToolTip="Please ensure play list has images before loading"/>
             <Separator/>
             <Label x:Name="VolumeText" Content="Volume:"/>
             <Slider x:Name="VolumeSlider" ValueChanged="VolumeSlider_ValueChanged" Maximum="1" TickFrequency="0.1" TickPlacement="BottomRight" Value="0.5" Width="79"/>

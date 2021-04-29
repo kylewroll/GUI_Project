@@ -195,12 +195,13 @@ namespace testApp
             }
         }
 
-        //function to load a playlist. if save playlist can save music/image files separately, this could be removed, and songs could be added by the add button. right now, reads in xaml file
-        //and adds song path to listbox
+        //function to load a playlist. Reads in xaml file and adds song and image data to arrays, and to listbox
         private void LoadPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
             //songNum for storing data properly
             int songNum = 0;
+
+            images = true;
 
             //create reader to read in file data
             StreamReader reader;
@@ -215,20 +216,16 @@ namespace testApp
                 reader = new StreamReader(load.FileName);
 
                 //run loop while file still has contents
-                while(reader.Peek() >= 0)
+                while (reader.Peek() >= 0)
                 {
-                    //store line's info at songNum's index
+                    //store song data at songNum index
                     songTitles[songNum] = reader.ReadLine();
                     songPaths[songNum] = reader.ReadLine();
 
-                    //read in images, if images have been previously added in this session. Maybe can find way to see if file has .jpg, which would allow the user to launch the app, and load
-                    //playlists immediately, and the app handles whether or not there are images in the file
-                    if(images)
-                    {
-                        imagePaths[songNum] = reader.ReadLine();
-                    }
+                    //store image data at songNum index
+                    imagePaths[songNum] = reader.ReadLine();
 
-                    //increase song number and run again
+                    //increase songNum for second run
                     songNum++;
                 }
 
