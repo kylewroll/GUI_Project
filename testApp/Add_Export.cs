@@ -201,7 +201,21 @@ namespace testApp
             //songNum for storing data properly
             int songNum = 0;
 
+            //automatically assumes images are loaded
             images = true;
+
+            //clear arrays, resize to original size, so they act like the newly created arrays
+            Array.Clear(songTitles, 0, songTitles.Length);
+            Array.Resize(ref songTitles, maxSongs);
+
+            Array.Clear(songPaths, 0, songPaths.Length);
+            Array.Resize(ref songPaths, maxSongs);
+
+            if (images)
+            {
+                Array.Clear(imagePaths, 0, imagePaths.Length);
+                Array.Resize(ref imagePaths, maxSongs);
+            }
 
             //create reader to read in file data
             StreamReader reader;
@@ -246,11 +260,7 @@ namespace testApp
                 //resize arrays, in case playlist has less songs previously added
                 Array.Resize(ref songTitles, songNum);
                 Array.Resize(ref songPaths, songNum);
-
-                if (images)
-                {
-                    Array.Resize(ref imagePaths, songNum);
-                }
+                Array.Resize(ref imagePaths, songNum);
 
                 //clear list
                 SongList.Items.Clear();

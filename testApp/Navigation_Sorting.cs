@@ -296,13 +296,18 @@ namespace testApp
             //reset song progress bar
             SongProgressBar.Value = 0;
 
-            //clear arrays
+            
+            //clear arrays, resize to original size, so they act like the newly created arrays
             Array.Clear(songTitles, 0, songTitles.Length);
+            Array.Resize(ref songTitles, maxSongs);
+
             Array.Clear(songPaths, 0, songPaths.Length);
+            Array.Resize(ref songPaths, maxSongs);
 
             if(images)
             {
                 Array.Clear(imagePaths, 0, imagePaths.Length);
+                Array.Resize(ref imagePaths, maxSongs);
             }
            
             //clear list
